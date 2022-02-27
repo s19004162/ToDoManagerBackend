@@ -1,0 +1,21 @@
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  logging:
+    level:
+      org:
+        hibernate:
+          stat: debug
+          type: trace
+#  datasource:
+#    drive-class-name: org.mysql.Driver
+#    url: jdbc:mysql://localhost:3306/mydb
+#    username: root
+#    password:
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    file:
+#      name=logs/application:
