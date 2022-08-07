@@ -1,4 +1,3 @@
-Jenkinsfile (Declarative Pipeline)
 pipeline {
 
     // 前提条件 Jenkinsサーバーにdocker, kubectl コマンドが導入されていること
