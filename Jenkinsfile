@@ -6,6 +6,10 @@ pipeline {
         }
     }
 
+    parameters {
+        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'main', name: 'BRANCH', type: 'PT_BRANCH'
+    }
+
     environment {
         registry = "docker.io/s19004162/todomanager-backend"
         dockerImage = ""
@@ -14,7 +18,7 @@ pipeline {
     stages {
         stage('GiHubからソースコードのクローン') {
             steps {
-                git -b main 'https://github.com/s19004162/ToDoManagerBackend.git'
+                git branch: "${params.BRANCH}", url: 'https://github.com/s19004162/ToDoManagerBackend.git'
             }
         }
         stage('コンテナイメージのビルド') {
