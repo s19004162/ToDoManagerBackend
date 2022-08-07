@@ -1,14 +1,11 @@
 pipeline {
 
-    // 前提条件 Jenkinsサーバーにdocker, kubectl コマンドが導入されていること
-    //
+    agent any
+
     environment {
         registry = "docker.io/s19004162/todomanager-backend"
         dockerImage = ""
-        KUBECONFIG = credentials('kubeconfig')
     }
-
-    agent any
 
     stages {
         stage('GiHubからソースコードのクローン') {
