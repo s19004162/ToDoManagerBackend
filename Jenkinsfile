@@ -3,7 +3,6 @@ pipeline {
     agent {
         kubernetes {
           defaultContainer 'jenkins-agent'
-          yamlFile 'jenkins-agent.yaml'
         }
     }
 
