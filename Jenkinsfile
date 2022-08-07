@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('GiHubからソースコードのクローン') {
             steps {
-                git 'https://github.com/s19004162/ToDoManagerBackend.git'
+                git -b main 'https://github.com/s19004162/ToDoManagerBackend.git'
             }
         }
         stage('コンテナイメージのビルド') {
