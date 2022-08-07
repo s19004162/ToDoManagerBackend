@@ -1,6 +1,11 @@
 pipeline {
 
-    agent any
+    agent {
+        kubernetes {
+          defaultContainer 'jenkins-agent'
+          yamlFile 'jenkins-agent.yaml'
+        }
+    }
 
     environment {
         registry = "docker.io/s19004162/todomanager-backend"
