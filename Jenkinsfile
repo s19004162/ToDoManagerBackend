@@ -28,7 +28,7 @@ pipeline {
         stage('コンテナレジストリへプッシュ') {
             steps {
                 script {
-                    docker.withRegistry("https://hub.docker.com/repository/docker/s19004162/todomanager-backend) {
+                    docker.withRegistry("https://hub.docker.com/repository/docker/s19004162/todomanager-backend") {
                         dockerImage.push()
                     }
                 }
