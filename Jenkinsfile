@@ -15,7 +15,8 @@ pipeline {
         stage('GiHubからソースコードのクローン') {
             steps {
                 echo env.BRANCH_NAME
-                git clone -b env.BRANCH_NAME 'https://github.com/s19004162/ToDoManagerBackend.git'
+                git branch: env.BRANCH_NAME,
+                    url: 'https://github.com/s19004162/ToDoManagerBackend.git'
             }
         }
         stage('コンテナイメージのビルド') {
