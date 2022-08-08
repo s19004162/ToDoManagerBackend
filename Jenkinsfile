@@ -19,6 +19,7 @@ pipeline {
     stages {
         stage('GiHubからソースコードのクローン') {
             steps {
+                echo ${env.BRANCH_NAME}
                 git branch: "${params.BRANCH}", url: 'https://github.com/s19004162/ToDoManagerBackend.git'
             }
         }
