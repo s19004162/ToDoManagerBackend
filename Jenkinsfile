@@ -28,15 +28,29 @@ pipeline {
 //             }
 //         }
         stage('コンテナレジストリへプッシュ') {
-            steps {
-                script {
-                    docker.withRegistry(registry) {
-                        git branch: env.BRANCH_NAME,
-                            url: 'https://github.com/s19004162/ToDoManagerBackend.git'
-                        docker.build(registry).push(":$BUILD_NUMBER")
-                    }
-                }
+
+            environment {
+                registryCredential = 'dockerhub'
             }
+            steps{
+               script {
+                   def appimage = docker.build registry + ":$BUILD_NUMBER"
+                   docker.withRegistry( '', registryCredential ) {
+                       appimage.push()
+                       appimage.push('latest')
+                   }
+               }
+           }
+
+//             steps {
+//                 script {
+//                     docker.withRegistry(registry) {
+//                         git branch: env.BRANCH_NAME,
+//                             url: 'https://github.com/s19004162/ToDoManagerBackend.git'
+//                         docker.build(registry).push(":$BUILD_NUMBER")
+//                     }
+//                 }
+//             }
         }
     }
 }
