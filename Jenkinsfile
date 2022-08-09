@@ -8,6 +8,7 @@ pipeline {
 
     environment {
         registry = "docker.io/s19004162/todomanager-backend"
+        registryCredential = 's19004162'
         dockerImage = ""
     }
 
@@ -28,7 +29,7 @@ pipeline {
         stage('コンテナレジストリへプッシュ') {
             steps {
                 script {
-                    docker.withRegistry("https://hub.docker.com/repository/docker/s19004162/todomanager-backend") {
+                    docker.withRegistry("", registryCredential) {
                         dockerImage.push()
                     }
                 }
