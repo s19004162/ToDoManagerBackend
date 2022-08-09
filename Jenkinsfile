@@ -30,12 +30,12 @@ pipeline {
         stage('コンテナレジストリへプッシュ') {
 
             environment {
-                registryCredential = 'dockerhub'
+                registryCredential = 's19004162'
             }
             steps{
                script {
                    def appimage = docker.build registry + ":$BUILD_NUMBER"
-                   docker.withRegistry( '', registryCredential ) {
+                   docker.withRegistry( registry, registryCredential ) {
                        appimage.push()
                        appimage.push('latest')
                    }
