@@ -13,6 +13,25 @@ pipeline {
     }
 
     stages {
+
+        stage('Set Container Name') {
+              steps {
+                    script {
+                        CURRENT_CONTAINER=sh(script: 'kubectl get pods jenkins-0 -n jenkins -o jsonpath="{.items[*].spec.containers[0].name}"',
+                                            returnStdout: true
+                                            ).trim()
+                        echo "Exec container ${CURRENT_CONTAINER}"
+                    }
+              }
+        }
+
+        stage('Echo Container Name') {
+            steps {
+                 echo "CURRENT_CONTAINER is ${CURRENT_CONTAINER}"
+            }
+        }
+
+
         stage('GiHubからソースコードのクローン') {
             steps {
                 git branch: env.BRANCH_NAME,
@@ -22,7 +41,7 @@ pipeline {
         stage('コンテナイメージのビルド') {
             steps {
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage = docker.build(registry + ":$BUILD_NUMBER")
                 }
             }
         }
